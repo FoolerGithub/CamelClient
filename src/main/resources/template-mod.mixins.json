@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "name.modid.mixins",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ExampleMixin",
+		"KeyboardMixin",
+		"MinecraftClientMixin",
+		"EntityMixin",
+		"HudMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

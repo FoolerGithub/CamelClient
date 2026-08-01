@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd D:\\\\Desktop\\\\cheat *)",
+      "Bash(./gradlew compileJava)"
+    ]
+  }
+}
