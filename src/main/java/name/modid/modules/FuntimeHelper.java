@@ -1,5 +1,6 @@
 package name.modid.modules;
 
+import name.modid.base.KeyInterceptor;
 import name.modid.base.Module;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.util.Hand;
 import org.lwjgl.glfw.GLFW;
 
-public class FuntimeHelper extends Module {
+public class FuntimeHelper extends Module implements KeyInterceptor {
 
     private int pendingSwapSlot = -1;
     private int pendingOriginalHotbar = -1;
@@ -19,8 +20,9 @@ public class FuntimeHelper extends Module {
         super("FuntimeHelper", GLFW.GLFW_KEY_K);
     }
 
-    public void onFastKey(int key) {
-        if (!this.isEnabled() || mc.player == null || mc.interactionManager == null) return;
+    @Override
+    public void onKeyPress(int key) {
+        if (mc.player == null || mc.interactionManager == null) return;
 
         // БИНД НА ТРАПКУ (Кнопка C)
         if (key == GLFW.GLFW_KEY_C) {

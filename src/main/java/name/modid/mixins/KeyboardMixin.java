@@ -1,7 +1,7 @@
 package name.modid.mixins;
 
 import name.modid.base.Client;
-import name.modid.modules.FuntimeHelper;
+import name.modid.base.KeyInterceptor;
 import net.minecraft.client.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,11 +18,11 @@ public class KeyboardMixin {
             // 1. Обычный бинд включения/выключения
             Client.INSTANCE.onKeyPress(key);
 
-            // 2. Проброс нажатия в FuntimeHelper
+            // 2. Проброс нажатия всем модулям-перехватчикам клавиш
             Client.INSTANCE.getModules().stream()
-                    .filter(m -> m instanceof FuntimeHelper)
-                    .map(m -> (FuntimeHelper) m)
-                    .forEach(helper -> helper.onFastKey(key));
+                    .filter(m -> m.isEnabled() && m instanceof KeyInterceptor)
+                    .map(m -> (KeyInterceptor) m)
+                    .forEach(interceptor -> interceptor.onKeyPress(key));
         }
     }
 }
